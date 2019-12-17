@@ -15,13 +15,13 @@ import es.catalogue.courses.web.dto.CourseDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest (classes = CatalogueCoursesApplication.class)
-@Sql("/courses.sql")
-public class FindCoursesInt {
+public class FindCoursesIT {
 
 	@Autowired
 	CourseController courseController;
 	
 	@Test
+	@Sql("/courses.sql")
 	public void shouldFindAll() {
 		Page<CourseDTO> result = courseController.findAll(0, 10, true);
 		assertEquals(result.getContent().size(), 5);
@@ -30,14 +30,16 @@ public class FindCoursesInt {
 	
 
 	@Test
-	public void shouldFindFirstPageThreeElements() {
+	@Sql("/courses.sql")
+	public void shouldFindFirstPageThreeCourses() {
 		Page<CourseDTO> result = courseController.findAll(0, 3, true);
 		assertEquals(result.getContent().size(), 3);
 	}
 
 	
 	@Test
-	public void shouldFindTwoPageLastPageTwoElements() {
+	@Sql("/courses.sql")
+	public void shouldFindTwoPageLastPageTwoCourses() {
 		Page<CourseDTO> result = courseController.findAll(0, 3, true);
 		result = courseController.findAll(result.nextPageable().getPageNumber(), 
 										  result.nextPageable().getPageSize(),
@@ -45,4 +47,11 @@ public class FindCoursesInt {
 		assertEquals(result.getContent().size(), 2);
 	}
 	
+	
+	@Test
+	@Sql("/coursesFalse.sql")
+	public void shouldNotFindCourses() {
+		Page<CourseDTO> result = courseController.findAll(0, 3, true);
+		assertEquals(result.getContent().size(), 0);
+	}
 }

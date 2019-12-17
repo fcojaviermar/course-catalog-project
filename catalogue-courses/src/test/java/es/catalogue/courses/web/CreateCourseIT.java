@@ -14,7 +14,7 @@ import es.catalogue.courses.web.dto.CourseDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest (classes = CatalogueCoursesApplication.class)
-public class CreateCourseTest {
+public class CreateCourseIT {
 
 	@Autowired
 	private CourseController courseController;
