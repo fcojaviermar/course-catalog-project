@@ -1,9 +1,13 @@
-package es.catalogue.courses.dto;
+package es.catalogue.courses.web.dto;
 
 import java.io.Serializable;
 
 import es.catalogue.courses.entity.Course;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter @Setter @EqualsAndHashCode 
 public class CourseDTO implements Serializable {
 
 	private static final long serialVersionUID = -3004363643555780755L;
@@ -19,8 +23,6 @@ public class CourseDTO implements Serializable {
 	}
 	
 	
-
-	
 	public CourseDTO(boolean active, int idTeacher, String title, int hours, int level) {
 		super();
 		this.active = active;
@@ -31,8 +33,6 @@ public class CourseDTO implements Serializable {
 	}
 
 
-
-
 	public CourseDTO(Course course) {
 		this.active = course.isActive();
 		this.idTeacher = course.getIdTeacher();
@@ -40,37 +40,5 @@ public class CourseDTO implements Serializable {
 		this.hours = course.getHours();
 		this.level = course.getLevel();
 	}
-	
-	public boolean isActive() {
-		return active;
-	}
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	public int getIdTeacher() {
-		return idTeacher;
-	}
-	public void setIdTeacher(int idTeacher) {
-		this.idTeacher = idTeacher;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public int getHours() {
-		return hours;
-	}
-	public void setHours(int hours) {
-		this.hours = hours;
-	}
-	public int getLevel() {
-		return level;
-	}
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	
 	
 }

@@ -7,5 +7,4 @@ import es.catalogue.courses.entity.Course;
 //@Repository
 public interface CourseRepository extends JpaRepository<Course, Integer> {
 	 
-	<S extends Course> S save(S entity);
 }

@@ -2,8 +2,8 @@ package es.catalogue.courses.web;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import es.catalogue.courses.dto.CourseDTO;
 import es.catalogue.courses.service.CourseService;
+import es.catalogue.courses.web.dto.CourseDTO;
 
 @RestController
 public class CourseController {

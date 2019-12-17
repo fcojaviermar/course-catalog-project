@@ -3,9 +3,14 @@ package es.catalogue.courses.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import es.catalogue.courses.dto.CourseDTO;
+import es.catalogue.courses.web.dto.CourseDTO;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Setter 
+@Getter
+@EqualsAndHashCode
 @Entity
 public class Course {
 	
@@ -37,54 +42,4 @@ public class Course {
 		this.level = courseDTO.getLevel();
 	}
 
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public int getIdTeacher() {
-		return idTeacher;
-	}
-
-	public void setIdTeacher(int idTeacher) {
-		this.idTeacher = idTeacher;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public int getHours() {
-		return hours;
-	}
-
-	public void setHours(int hours) {
-		this.hours = hours;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	
-	
 }

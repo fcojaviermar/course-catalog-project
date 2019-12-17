@@ -9,9 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import es.catalogue.courses.dto.CourseDTO;
 import es.catalogue.courses.service.CourseService;
 import es.catalogue.courses.web.CourseController;
+import es.catalogue.courses.web.dto.CourseDTO;
 
 
 @RunWith(MockitoJUnitRunner.class)

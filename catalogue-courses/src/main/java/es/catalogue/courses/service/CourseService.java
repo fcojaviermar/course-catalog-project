@@ -1,6 +1,6 @@
 package es.catalogue.courses.service;
 
-import es.catalogue.courses.dto.CourseDTO;
+import es.catalogue.courses.web.dto.CourseDTO;
 
 public interface CourseService {
 
