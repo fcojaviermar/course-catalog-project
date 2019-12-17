@@ -22,6 +22,8 @@ public class Course {
 	private int hours;
 	private int level;
 	
+	public Course() {
+	}
 	
 	public Course(int id, boolean active, int idTeacher, String title, int hours, int level) {
 		super();

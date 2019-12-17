@@ -1,13 +1,20 @@
-package es.catalogue.courses;
+package es.catalogue.courses.web;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import es.catalogue.courses.service.CourseService;
 import es.catalogue.courses.web.CourseController;
@@ -39,5 +46,22 @@ public class CourseControllerTest {
 	}
 	
 	
+	@Test
+	public void shouldReturnCourses() {
+		List<CourseDTO> listResult = new ArrayList<>();
+		listResult.add(new CourseDTO(true, 1, "Micro", 40, 1));
+		listResult.add(new CourseDTO(true, 2, "Eclipse", 20, 2));
+		Page<CourseDTO> pagedTasks = new PageImpl<CourseDTO>(listResult);
+		
+		
+		when(courseService.findAll(PageRequest.of(0, 10), true)).thenReturn(pagedTasks);
+		Page<CourseDTO> result = courseController.findAll(0, 10, true);
+		
+		result.forEach(p -> assertTrue(listResult.contains(p)) );
+	}
+	
+	
 	
 }
+
+

@@ -2,20 +2,36 @@ package es.catalogue.courses.web.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 import es.catalogue.courses.entity.Course;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter @EqualsAndHashCode 
+@Getter 
+@Setter 
+@EqualsAndHashCode
 public class CourseDTO implements Serializable {
 
 	private static final long serialVersionUID = -3004363643555780755L;
 
+	
 	private boolean active;
+	
+	@Min(value = 1)
 	private int idTeacher;
+	
+	@NotEmpty
 	private String title;
+	
+	@Min(value = 1)
 	private int hours;
+	
+	@Min(value = 1)
+	@Max(value = 3)
 	private int level;
 
 	
