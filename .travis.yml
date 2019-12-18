@@ -1,2 +1,4 @@
 language: java
 jdk: openjdk12
+
+script: "mvn test install -f catalogue-courses/pom.xml"
