@@ -1,14 +1,13 @@
 package es.catalogue.courses.service.impl;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +20,9 @@ import es.catalogue.courses.web.dto.CourseDTO;
 @Service
 public class CourseServiceImpl implements CourseService {
 
+	@Autowired
+	private Environment env;
+	
 	@Autowired
 	private final CourseRepository courseRepository;
 	
@@ -37,21 +39,29 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	
-	public Page<CourseDTO> findAll(Pageable pageRequest, boolean active) {
-		List<CourseDTO> result = new ArrayList<CourseDTO>();
+	
+	public Page<CourseDTO> findAll(Integer page, Integer size, Boolean active) {
+		Page<Course> listCourses = null;
 		
-		Page<Course> listCourses = courseRepository.findAllByActive(pageRequest, active);		
-				
-//		listCourses = StreamSupport.stream(courseRepository.findAll(pageRequest).spliterator(), false)
-//					.filter(course -> course.getAccountIban().contains(accountIban))
-//					.sorted(Comparator.comparing Double(TransactionPayload::getAmount))
-//					.collect(Collectors.toList());
+		Pageable pageRequest = page(page, size);
 		
-		
-		
-		listCourses.forEach(p -> result.add(new CourseDTO(p)));
-				
+		if (null != active) {
+			listCourses = courseRepository.findAllByActive(pageRequest, active);
+		} else {
+			listCourses = courseRepository.findAll(pageRequest);
+		}
+	
+		List<CourseDTO> result = listCourses.stream().map(course -> new CourseDTO(course)).collect(Collectors.toList());
+	
 		return new PageImpl<CourseDTO>(result, listCourses.getPageable(), listCourses.getTotalElements());
-		
+	}
+	
+	
+	private Pageable page(Integer page, Integer size) {
+		if  (null == page || size == null) {
+			page = Integer.valueOf(env.getProperty("page"));
+			size = Integer.valueOf(env.getProperty("size"));
+		}
+		return  PageRequest.of(page, size);
 	}
 }

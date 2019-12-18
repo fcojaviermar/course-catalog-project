@@ -4,8 +4,7 @@ import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,15 +25,14 @@ public class CourseController {
 
 	//courses -> sustantivo, plural 
 	@RequestMapping(value = "/courses", method = RequestMethod.POST)
-	public CourseDTO add(CourseDTO course) {
+	public CourseDTO add(@RequestBody CourseDTO course) {
 		return courseService.add(course);
 	}
 
 
 	@RequestMapping(value = "/courses", method=RequestMethod.GET)
-	public Page<CourseDTO> findAll(@QueryParam("page") int page, @QueryParam("size") int size, 
-								   @QueryParam("active") boolean active) {
-		Pageable pageRequest = PageRequest.of(page, size);
-		return courseService.findAll(pageRequest, active);
+	public Page<CourseDTO> findAll(@QueryParam("page") Integer page, @QueryParam("size") Integer size, 
+								   @QueryParam("active") Boolean active) {
+		return courseService.findAll(page, size, active);
 	}
 }

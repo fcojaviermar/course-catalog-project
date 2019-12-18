@@ -14,10 +14,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 
 import es.catalogue.courses.service.CourseService;
-import es.catalogue.courses.web.CourseController;
 import es.catalogue.courses.web.dto.CourseDTO;
 
 
@@ -54,7 +52,7 @@ public class CourseControllerTest {
 		Page<CourseDTO> pagedTasks = new PageImpl<CourseDTO>(listResult);
 		
 		
-		when(courseService.findAll(PageRequest.of(0, 10), true)).thenReturn(pagedTasks);
+		when(courseService.findAll(0, 10, true)).thenReturn(pagedTasks);
 		Page<CourseDTO> result = courseController.findAll(0, 10, true);
 		
 		result.forEach(p -> assertTrue(listResult.contains(p)) );

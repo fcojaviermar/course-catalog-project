@@ -60,7 +60,7 @@ public class CourseServiceTest {
 		
 		Pageable firstPageWithTwoElements = PageRequest.of(0, 2);		
 		when(courseRepository.findAllByActive(firstPageWithTwoElements, true)).thenReturn(pagedReturn);
-		Page<CourseDTO> result = courseService.findAll(firstPageWithTwoElements, true);
+		Page<CourseDTO> result = courseService.findAll(0, 2, true);
 		
 		result.forEach(p -> assertTrue(listResult.contains(p)));
 	}

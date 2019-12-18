@@ -1,7 +1,7 @@
 FROM openjdk:12 
 
-COPY catalogue-course/target/*.jar catalogue-course.jar
+COPY catalogue-courses/target/catalogue-course-1.0.0.jar catalogue-course-1.0.0.jar
 
 EXPOSE 8080
  
-CMD ["java", "-jar", "-Dserver.port=8080", "catalogue-course.jar"]
+CMD ["java", "-jar", "-Dserver.port=8080", "catalogue-course-1.0.0.jar"]
